@@ -48,13 +48,13 @@ client.on("ready", async () => {
     };
     
     if (!lastStreak) {
-      let newStreak = Date.now();
+      let newStreak = 0;
       await db.set("lastStreak", newStreak);
       lastStreak = newStreak;
     };
 
     embed
-    .addField("Last Streak", `<t:${Math.round(Number(lastStreak) / 1000)}:R>`)
+    .addField("Last Streak", `${prettyMS(lastStreak, {verbose: true})}`)
     .addField("Last Relapse", `<t:${Math.round(Number(lastRelapse) / 1000)}:F>`);
 
     try {
@@ -110,14 +110,15 @@ client.on("interactionCreate", async (interaction) => {
     await db.set("lastRelapse", timeNow);
 
     // set new streak
-    let calculatedPreviousStreak = Number(lastRelapse - timeNow);
+    let calculatedPreviousStreak = Number(timeNow - lastRelapse);
     if (calculatedPreviousStreak >= Number(lastStreak)) {
       // set a new record
       await db.set("lastStreak", calculatedPreviousStreak);
+      lastStreak = calculatedPreviousStreak;
     };
 
     const embed = new Eris.RichEmbed().setColor(0x7289DA).setTitle("Last Fap")
-    .addField("Last Streak", `<t:${Math.round(Number(calculatedPreviousStreak) / 1000)}:R>`)
+    .addField("Last Streak", `${prettyMS(lastStreak, {verbose: true})}`)
     .addField("Last Relapse", `<t:${Math.round(timeNow / 1000)}:F>`);
 
     await client.editMessage(lastEmbed.channelID, lastEmbed.messageID, {embeds: [embed]});
