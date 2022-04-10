@@ -4,6 +4,7 @@ This side-project was inspired by [Rewire Companion](https://rewirecompanion.com
 This was intended for personal-use, and for people who might addicted with porn and masturbation. <br>
 
 ## Installation
+- Install [Node.js](https://nodejs.org/) (LTS / v16.x)
 - Clone the repo
 - Type `npm i`
 - Rename `.env.example` to `.env` only
