@@ -1,12 +1,13 @@
 # Last Fap
 Easiest way to record your last fapping time and date, only one button on [Discord](https://discord.com). <br>
 This side-project was inspired by [Rewire Companion](https://rewirecompanion.com/). <br>
-This was intended for personal-use, or for people who might addicted with porn and masturbation. <br>
+This was intended for personal-use, and for people who might addicted with porn and masturbation. <br>
 
 ## Installation
 - Type `npm i`
 - Put your Discord bot token on `.env.example`
 - Rename `.env.example` to `.env` only
+- Adjust `src/config.js` such as guild ID, or channel ID.
 - Type `node .` or `node src/main.js`
 
 ## Preview
