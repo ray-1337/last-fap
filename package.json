@@ -12,5 +12,8 @@
   "dependencies": {
     "eris": "^0.16.1",
     "jsoning": "^0.13.23"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0"
   }
 }
