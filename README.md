@@ -1,6 +1,7 @@
 # Last Fap
 Easiest way to record your last fapping time and date, only one button on [Discord](https://discord.com). <br>
-This side-project was inspired by [Rewire Companion](https://rewirecompanion.com/).
+This side-project was inspired by [Rewire Companion](https://rewirecompanion.com/). <br>
+This was intended for personal-use, or for people who might addicted with porn and masturbation. <br>
 
 ## Installation
 - Type `npm i`
