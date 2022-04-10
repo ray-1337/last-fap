@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const jsoning = require("jsoning");
 const pluris = require("pluris");
 const config = require("./config");
+const prettyMS = require("pretty-ms");
 
 // initiate json base
 let db = new jsoning(`./db/db.json`);
@@ -27,6 +28,7 @@ pluris(Eris, {
 });
 
 const embed = new Eris.RichEmbed().setColor(0x7289DA).setTitle("Last Fap");
+const buttonCustomID = "relapsed_fap_btn";
 
 client.on("ready", async () => {
   let lastEmbed = await db.get("lastEmbed");
@@ -62,7 +64,7 @@ client.on("ready", async () => {
             components: [{
               type: Eris.Constants.ComponentTypes.BUTTON,
               style: Eris.Constants.ButtonStyles.DANGER,
-              custom_id: "relapsed_fap_btn",
+              custom_id: buttonCustomID,
               label: "Relapse/Reset Streak"
             }]
           }
@@ -75,6 +77,30 @@ client.on("ready", async () => {
   console.log("Ready!");
 });
 
-client.o
+client.on("interactionCreate", async (interaction) => {
+  // defer + ephemeral
+  await interaction.defer(64);
+
+  // must be button
+  if (
+    interaction instanceof Eris.ComponentInteraction &&
+    interaction.data.component_type == Eris.Constants.ComponentTypes.BUTTON &&
+    interaction.data.custom_id == buttonCustomID
+  ) {
+    let lastStreak = await db.get("lastStreak");
+    let lastRelapse = await db.get("lastRelapse");
+
+    // set new relapse
+    await db.set("lastRelapse", Date.now());
+
+    // set new streak
+    if (Number(lastRelapse - Date.now()) >= Number(lastStreak)) {
+      // set a new record
+      await db.set("lastStreak", Number(lastRelapse - Date.now()));
+    };
+
+    return interaction.createMessage("Relapsed.");
+  };
+});
 
 client.connect();
