@@ -27,12 +27,13 @@ pluris(Eris, {
   webhooks: false
 });
 
-const embed = new Eris.RichEmbed().setColor(0x7289DA).setTitle("Last Fap");
 const buttonCustomID = "relapsed_fap_btn";
 
 client.on("ready", async () => {
   let lastEmbed = await db.get("lastEmbed");
   if (!lastEmbed.channelID || !lastEmbed.messageID) {
+    const embed = new Eris.RichEmbed().setColor(0x7289DA).setTitle("Last Fap");
+    
     // the longest zero relapse
     let lastStreak = await db.get("lastStreak");
     
@@ -87,17 +88,26 @@ client.on("interactionCreate", async (interaction) => {
     interaction.data.component_type == Eris.Constants.ComponentTypes.BUTTON &&
     interaction.data.custom_id == buttonCustomID
   ) {
+    let lastEmbed = await db.get("lastEmbed");
     let lastStreak = await db.get("lastStreak");
     let lastRelapse = await db.get("lastRelapse");
+    let timeNow = Date.now();
 
     // set new relapse
-    await db.set("lastRelapse", Date.now());
+    await db.set("lastRelapse", timeNow);
 
     // set new streak
-    if (Number(lastRelapse - Date.now()) >= Number(lastStreak)) {
+    let calculatedPreviousStreak = Number(lastRelapse - timeNow);
+    if (calculatedPreviousStreak >= Number(lastStreak)) {
       // set a new record
-      await db.set("lastStreak", Number(lastRelapse - Date.now()));
+      await db.set("lastStreak", calculatedPreviousStreak);
     };
+
+    const embed = new Eris.RichEmbed().setColor(0x7289DA).setTitle("Last Fap")
+    .addField("Last Streak", `<t:${Math.round(Number(calculatedPreviousStreak) / 1000)}:R>`)
+    .addField("Last Relapse", `<t:${Math.round(timeNow / 1000)}:F>`);
+
+    await client.editMessage(lastEmbed.channelID, lastEmbed.messageID, {embeds: [embed]});
 
     return interaction.createMessage("Relapsed.");
   };
