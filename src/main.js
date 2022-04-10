@@ -6,7 +6,7 @@ const config = require("./config");
 const prettyMS = require("pretty-ms");
 
 // initiate json base
-let db = new jsoning(`./db/db.json`);
+let db = new jsoning(`src/db/db.json`);
 
 dotenv.config();
 
