@@ -1,4 +1,4 @@
 node_modules/**/*
 .env
 package-lock.json
-src/db/**/*
+src/db/*
