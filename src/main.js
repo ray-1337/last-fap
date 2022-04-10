@@ -118,7 +118,7 @@ client.on("interactionCreate", async (interaction) => {
     };
 
     const embed = new Eris.RichEmbed().setColor(0x7289DA).setTitle("Last Fap")
-    .addField("Last Streak", `${prettyMS(lastStreak, {verbose: true})}`)
+    .addField("Last Streak", `${prettyMS(Math.floor(Math.round(lastStreak / 1000) * 1000), {verbose: true})}`)
     .addField("Last Relapse", `<t:${Math.round(timeNow / 1000)}:F>`);
 
     await client.editMessage(lastEmbed.channelID, lastEmbed.messageID, {embeds: [embed]});
