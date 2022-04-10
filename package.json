@@ -1,0 +1,12 @@
+{
+  "name": "last-fap",
+  "version": "0.0.1",
+  "description": "Track your last fap record with buttons component on Discord.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
