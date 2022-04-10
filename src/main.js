@@ -4,6 +4,12 @@ const jsoning = require("jsoning");
 const pluris = require("pluris");
 const config = require("./config");
 const prettyMS = require("pretty-ms");
+const fs = require("fs");
+
+// check db folder inside ./src
+if (!fs.existsSync("./src/db/")) {
+  fs.mkdirSync("./src/db/")
+};
 
 // initiate json base
 let db = new jsoning(`src/db/db.json`);
