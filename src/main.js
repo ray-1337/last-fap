@@ -37,13 +37,21 @@ client.on("ready", async () => {
     // when you click the button, it grabs your last relapsed date
     let lastRelapse = await db.get("lastRelapse");
 
-    if (lastRelapse) {
-      embed.addField("Last Relapse", `<t:${Math.round(Number(lastRelapse) / 1000)}:F>`);
+    if (!lastStreak) {
+      let newRelapse = Date.now();
+      await db.set("lastRelapse", newRelapse);
+      lastRelapse = newRelapse;
     };
     
-    if (lastStreak) {
-      embed.addField("Last Streak", `<t:${Math.round(Number(lastStreak) / 1000)}:R>`);
+    if (!lastStreak) {
+      let newStreak = Date.now();
+      await db.set("lastStreak", newStreak);
+      lastStreak = newStreak;
     };
+
+    embed
+    .addField("Last Streak", `<t:${Math.round(Number(lastStreak) / 1000)}:R>`)
+    .addField("Last Relapse", `<t:${Math.round(Number(lastRelapse) / 1000)}:F>`);
 
     try {
       await client.createMessage(config.channelID, {
@@ -66,5 +74,7 @@ client.on("ready", async () => {
   };
   console.log("Ready!");
 });
+
+client.o
 
 client.connect();
