@@ -4,10 +4,11 @@ This side-project was inspired by [Rewire Companion](https://rewirecompanion.com
 This was intended for personal-use, and for people who might addicted with porn and masturbation. <br>
 
 ## Installation
+- Clone the repo
 - Type `npm i`
-- Put your Discord bot token on `.env.example`
 - Rename `.env.example` to `.env` only
-- Adjust `src/config.js` such as guild ID, or channel ID.
+- Put your Discord bot token on `.env`
+- Adjust `src/config.js` such as guild ID, and also the channel ID.
 - Type `node .` or `node src/main.js`
 
 ## Preview
