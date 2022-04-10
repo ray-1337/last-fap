@@ -57,7 +57,7 @@ client.on("ready", async () => {
     .addField("Last Relapse", `<t:${Math.round(Number(lastRelapse) / 1000)}:F>`);
 
     try {
-      await client.createMessage(config.channelID, {
+      let embedMsg = await client.createMessage(config.channelID, {
         embeds: [embed],
         components: [
           {
@@ -70,7 +70,9 @@ client.on("ready", async () => {
             }]
           }
         ]
-      })
+      });
+
+      await db.set("lastEmbed", {channelID: embedMsg.channel.id, messageID: embedMsg.id});
     } catch (error) {
       return console.error(error);
     };
