@@ -17,7 +17,7 @@ let db = new jsoning(`src/db/db.json`);
 dotenv.config();
 
 const client = new Eris.Client(String("Bot " + process.env["DISCORD_BOT_TOKEN"]), {
-  intents: Eris.Constants.Intents.guilds | Eris.Constants.Intents.guildMessages,
+  intents: Eris.Constants.Intents.guilds,
   messageLimit: 0,
   restMode: true
 });
