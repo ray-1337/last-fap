@@ -15,7 +15,7 @@ const client = new Eris.Client(String("Bot" + process.env["DISCORD_BOT_TOKEN"]),
   restMode: true
 });
 
-require("pluris")(Eris, {
+pluris(Eris, {
   awaitMessages: false,
   awaitReactions: false,
   createDMMessage: false,
