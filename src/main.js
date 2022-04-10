@@ -31,6 +31,7 @@ const buttonCustomID = "relapsed_fap_btn";
 
 client.on("ready", async () => {
   let lastEmbed = await db.get("lastEmbed");
+
   if (!lastEmbed.channelID || !lastEmbed.messageID) {
     const embed = new Eris.RichEmbed().setColor(0x7289DA).setTitle("Last Fap");
     
@@ -76,7 +77,17 @@ client.on("ready", async () => {
     } catch (error) {
       return console.error(error);
     };
+  } else {
+    let existence = await client.getMessage(lastEmbed.channelID, lastEmbed.messageID).catch(() => {});
+
+    // reconnect if the embed is not existed
+    if (!existence) {
+      await db.delete("lastEmbed");
+      
+      return client.disconnect({reconnect: true});
+    };
   };
+
   console.log("Ready!");
 });
 
