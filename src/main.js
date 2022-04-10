@@ -32,7 +32,7 @@ const buttonCustomID = "relapsed_fap_btn";
 client.on("ready", async () => {
   let lastEmbed = await db.get("lastEmbed");
 
-  if (!lastEmbed.channelID || !lastEmbed.messageID) {
+  if (!lastEmbed?.channelID || !lastEmbed?.messageID) {
     const embed = new Eris.RichEmbed().setColor(0x7289DA).setTitle("Last Fap");
     
     // the longest zero relapse
