@@ -11,7 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "eris": "^0.16.1",
-    "jsoning": "^0.13.23"
+    "jsoning": "^0.13.23",
+    "pluris": "^0.3.7"
   },
   "devDependencies": {
     "dotenv": "^16.0.0"
