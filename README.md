@@ -1,3 +1,6 @@
+# Archive
+This might be still working for a few years and so on. I'm just archiving it, 'cause I have no time to maintain this.
+
 # Last Fap
 Easiest way to record your last fapping time and date, only one button on [Discord](https://discord.com). <br>
 This side-project was inspired by [Rewire Companion](https://rewirecompanion.com/). <br>
